@@ -1,0 +1,148 @@
+<div class="container mt-4">
+  <form #form="ngForm" (ngSubmit)="submitForm(form, $event)">
+    <div class="mb-3 row">
+      <h2>Template Driven Form</h2>
+      <label for="user-name" class="col-4 col-form-label">User Name</label>
+      <div class="col-8">
+        <input
+          [ngModelOptions]="{ updateOn: 'change', name: 'userName' }"
+          required
+          email
+          minlength="10"
+          name="userName"
+          #userName="ngModel"
+          [(ngModel)]="formValues.userName"
+          type="text"
+          class="form-control"
+          placeholder="User Name"
+        />
+        <label *ngIf="userName.errors?.['required']"
+          >Please enter valid email.</label
+        >
+        <label *ngIf="userName.errors?.['email']">Enter valid email.</label>
+        <label *ngIf="userName.errors?.['minlength']"
+          >Minimum 10 characters are required.</label
+        >
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="u-password" class="col-4 col-form-label">Password</label>
+      <div class="col-8">
+        <input
+          [ngModelOptions]="{ updateOn: 'change', name: 'password' }"
+          required
+          minlength="10"
+          name="password"
+          #password="ngModel"
+          [(ngModel)]="formValues.password"
+          type="password"
+          class="form-control"
+          placeholder="Password"
+        />
+        <label *ngIf="password.errors?.['required']"
+          >Password is required.</label
+        >
+        <label *ngIf="password.errors?.['minlength']"
+          >Minimum 10 characters are required.</label
+        >
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <button type="submit" class="btn btn-primary" style="margin-right: 4px">
+          Submit</button
+        ><button
+          type="button"
+          class="btn btn-primary"
+          (click)="resetForm(form)"
+        >
+          Reset
+        </button>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col">
+        Form Value: <strong>{{ form.value | json }}</strong>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col">
+        User Name:<strong>{{ userName.value }}</strong>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col">
+        Password: <strong>{{ password.value }}</strong>
+      </div>
+    </div>
+  </form>
+</div>
+<hr />
+<div class="container mt-4">
+  <form [formGroup]="formR" (ngSubmit)="submitFormR()">
+    <div class="mb-3 row">
+      <h2>Model Driven Form</h2>
+      <label for="user-name" class="col-4 col-form-label">User Name</label>
+      <div class="col-8">
+        <input
+          formControlName="userNameR"
+          type="text"
+          class="form-control"
+          placeholder="User Name"
+        />
+        <label *ngIf="formR.controls['userNameR'].errors?.['required']"
+          >Please enter valid email.</label
+        >
+        <label *ngIf="formR.controls['userNameR'].errors?.['email']"
+          >Enter valid email.</label
+        >
+        <label *ngIf="formR.controls['userNameR'].errors?.['minlength']"
+          >Minimum 10 characters are required.</label
+        >
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="u-password" class="col-4 col-form-label">Password</label>
+      <div class="col-8">
+        <input
+          formControlName="passwordR"
+          type="password"
+          class="form-control"
+          placeholder="Password"
+        />
+        <label *ngIf="formR.controls['passwordR'].errors?.['required']"
+          >Password is required.</label
+        >
+        <label *ngIf="formR.controls['passwordR'].errors?.['minlength']"
+          >Minimum 10 characters are required.</label
+        >
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <button type="submit" class="btn btn-primary" style="margin-right: 4px">
+          Submit</button
+        ><button type="button" class="btn btn-primary" (click)="resetFormR()">
+          Reset
+        </button>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col">
+        Form Value: <strong>{{ formR.value | json }}</strong>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col">
+        User Name:<strong>{{ formR.controls["userNameR"].value }}</strong>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col">
+        Password: <strong>{{ formR.controls["passwordR"].value }}</strong>
+      </div>
+    </div>
+  </form>
+</div>
